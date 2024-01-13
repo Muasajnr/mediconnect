@@ -1,0 +1,37 @@
+plugins {
+    id 'java'
+    id 'war' // Apply the 'war' plugin to package web application
+}
+
+group 'com.example'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = '1.8' // Use your required Java version
+
+repositories {
+    mavenCentral() // Use Maven Central for resolving dependencies
+}
+
+dependencies {
+    // Add dependencies for Servlet API. Provided at runtime by the server, so marked as 'providedCompile'.
+    providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
+
+    // If you use additional frameworks or libraries, add them here.
+    // For example, to use Spring Boot:
+    // implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // JDBC driver for MySQL, or another database if you're using one.
+    runtimeOnly 'mysql:mysql-connector-java:8.0.23'
+
+    // Testing dependencies
+    testImplementation 'junit:junit:4.13.2'
+}
+
+// Configure the 'war' plugin's behavior
+war {
+    // Define the name of the generated WAR file if different from the project's base name
+    archiveFileName = 'MyWebApp.war'
+}
+
+// Define the task to run the application for development purposes
+// This can use an embedded server like Gretty (you will need to add Gretty's plugin and configuration)
